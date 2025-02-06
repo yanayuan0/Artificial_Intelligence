@@ -1,0 +1,8 @@
+Total: (9.75/10)
+
+Heuristics: (2.75/3)
+(-0.25) Heuristics for Fifteen Puzzle assume that the goal puzzle
+is always the default rather than checking with the .goal member
+variable.
+
+Informed search and experiments: (7/7)

@@ -1,0 +1,39 @@
+                             H E U R I S T I C S
+             Moves        Zero    Blocking   Better
+Puzzle       to Goal    expanded  expanded  expanded
+traffic00      7           106       35        24
+traffic02      9           684       188       188
+traffic04      9           34         25       23               
+traffic06     13           85         64       64
+traffic08      13          347        169      152
+traffic10      22           234       147      129
+ 
+                             H E U R I S T I C S
+             Moves     Displaced   Manhattan  Bonus
+Puzzle       to Goal    expanded   expanded   expanded
+fifteen00      4           5         4
+fifteen01     24         15134      1511
+fifteen02     24        16748       1006
+fifteen03     26        34086       410
+fifteen04     20        7100        616
+
+
+Complete the tables given above.
+
+
+How does your better heuristic improve on blocking (while maintaining
+admissibility)?
+
+Our better heuristic improves on blocking by providing another check to see whether the rows ahead of 
+the zero car has cars that are in the same column as the zero car and could not be moved left or right because it has
+wall or other cars on the left and right to block it. Since we know that all the cars in front of
+the zero car should be horizontal or the zero car cannot get out, then we check whether those cars are blocked
+by cars or walls on the left and right. If those cars are blocked on the left and right, then we need to at least move
+the cars around them first, and then we could move those cars that have the same column with the zero car. Our better 
+heuristic have counted the moves that include moving the cars around the cars that block zero cars on the top rows which 
+blocking heuristic does not count, and we also maintain admissibility because moving the cars around
+the cars that block the zero cars are steps that are required in playing the game and the better heuristic 
+is an underestimate of the traffic game. 
+
+If you implemented the bonus heuristic, how does it improve on
+Manhattan (while maintaining admissibility)?
