@@ -1,0 +1,137 @@
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\usepackage{float}
+
+\title{CS63 Fall 2020\\Lab 6: Convolutional Neural Networks}
+\author{Mavis Gao, Yana Yuan}
+\date{}
+
+\begin{document}
+
+% Look in /home/meeden/public/latex-example for an example of how
+% to inclue figures and create tables in your latex document.
+
+\maketitle
+
+\section{Data Set}
+
+The data set we used to train our convolutional network is called fashion
+and it is a MNIST data set. It includes training images and testing images
+to train our ConvNet in identifying the type of the cloth in the image.
+In our case, we used 60000 training images and 10000 test images, each of 
+size 28*28. The categories are t-shirt, trouser, pullover, dress, coat, 
+sandal, shirt, sneaker, bag and boot. 
+
+\section{Network}
+
+
+The general design of our convolutional neural network is an input layer, 
+a hiddden layer, and an output layer. The hidden layer is composed of 
+3 convolutional 2D layers, a max pooling 2D layer, a flatten layer, and a dense
+(fully connected) layer. \\ \\More specifically, our best performing network has an ascending number of
+filters in each of the convolutional layer. Details of the number of filters in
+the summary below.
+
+\begin{figure}[H]
+  \begin{center}
+  \includegraphics[scale=0.35]{summary.jpg}
+  \end{center}
+  \caption{Summary of our convolutional neural network. The size and
+  number of filters in each convolutional layer is shown in the "Output Shape" section.}
+  \label{environment}
+  \end{figure}
+
+\\ \noindent Thoughts on why our ConvNet performed well:
+\\ \textbf{Increasing filters in Conv2D layers:} The increasing filters in convolutional
+layers from 40 to 80 allows the network to learn increasingly complex and higher-level
+features from the input image. As our input images include complex patterns in different
+kind of clothes, the network is capable of performing simple tasks such as identifying
+edges and textures to complicated tasks such as identifying the shape of high heels and
+long sleeves. 
+\\ \textbf{MaxPooling 2D layer:} We tried different size and different number of pooling
+layers and a pool size of (2,2) seemed to perform well, especially at reducing the problem
+of overfitting. A pooling layer could reduce the spatial dimensions and reduce computational
+cost as well. 
+\\ \textbf{Dense layer:} The hidden dense layer allows our ConvNet to learn non-linear
+combinations of the higher-level features so that it can perform better at identifying
+complicated patterns. 
+
+\section{Training}
+
+\begin{table}[h]
+  \begin{center}
+  \begin{tabular}{|l|r|k|} \hline
+  {\bf Trial} & {\bf Validation Accuracy} & {\bf Validation Loss}  \\ \hline
+  1 & 0.9015 & 0.2769 \\
+  2 & 0.9021 & 0.2754 \\
+  3 & 0.9046 & 0.2780 \\ 
+  4 & 0.9021 & 0.2881 \\ 
+  5 & 0.9011 & 0.2792 \\ 
+  Average & 0.9023 & 0.2795 \\ \hline
+  \end{tabular}
+  \label{params}
+  \caption{Validation results of five trials.}
+  \end{center}
+  \end{table}
+
+
+\begin{figure}[H]
+  \begin{center}
+  \includegraphics[scale=0.35]{graphs.jpg}
+  \end{center}
+  \caption{Learning graphs of the second trial.}
+  \label{environment}
+  \end{figure}
+
+\section{Evaluation}
+
+\\ The network is good at identifying:
+\\     1. Trousers: with 974 true positives and few miss classifications
+\\     2. Bags: 976 positives
+\\     3. Ankle boots: 956 positives
+\\
+\\ The network is bad at identifying:
+\\     1. Shirts: with 346 shirts that are missed, which is confused with T-shirts, 
+pullovers, and coats
+\\     2. Pullovers: with 214 instances of missed pullovers
+\\
+\\ Easiest categories to learn: Trouser, Bags, Ankle boots
+\\ Hardest categories to learn: Shirts
+
+\begin{figure}[H]
+  \begin{center}
+  \includegraphics[scale=0.5]{maps.jpg}
+  \end{center}
+  \caption{Feature maps of three Convolutional layers and one MaxPooling layer.}
+  \label{environment}
+  \end{figure}
+
+\\ 
+\\
+\\
+\noindent \textbf{Speculation on why this is the case: } We think this might be the case 
+because trousers have distinctive patterns, such as long, straight legs, and bags 
+have unique shoes with a large block, while shirts have similar patterns with other 
+objects such as pullovers and T-shirts, which is hard for the network to capture the 
+subtle features, and the variability of the shirt itself could contribute to the 
+misclassification. 
+\\
+\\ \textbf{Description and analysis: } The model achieved an accuracy of 92.38 percent
+ on the training set and 90.15 percent on the test set in the first trial, which is 
+ relatively high; and based on the confusion matrix, the matrix seem to confuse shirts, 
+ T-shirts, and pullovers, this could be due to similar textures or patterns that the 
+ clothes have and the filter of the network could not identify, and the least number 
+ of incorrect classifications were trousers and bags, which implies that the network's 
+ filters could identify the patterns of these categories. 
+
+\begin{figure}[H]
+  \begin{center}
+  \includegraphics[scale=0.5]{matrix.png}
+  \end{center}
+  \caption{Matrix indicating what categories the ConvNet was good and bad at identifying. This
+  matrix shows the result of Trial2.}
+  \label{environment}
+  \end{figure}
+
+\end{document}

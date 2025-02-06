@@ -1,0 +1,8 @@
+Total: (9/10)
+
+Neural Net: (4/5)
+(-1) In the test function, instead of `float(len(target_vector))', it should be `float(len(data_set))'.
+
+Testing: (3/3)
+
+Explanation: (2/2)

@@ -1,0 +1,5 @@
+Total: (10/10)
+
+Min Max Players: (5/5)
+
+Static evaluators: (5/5)
